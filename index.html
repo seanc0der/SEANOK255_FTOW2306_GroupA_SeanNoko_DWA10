@@ -1,19 +1,64 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" class="sl-theme-dark">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
 		<link
 			rel="stylesheet"
-			href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.11.2/cdn/themes/light.css"
+			href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.11.2/cdn/themes/dark.css"
 		/>
+
 		<script
 			type="module"
 			src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.11.2/cdn/shoelace-autoloader.js"
 		></script>
+
 		<link rel="stylesheet" href="./css/styles.css" />
+
 		<script src="scripts.js" defer type="module"></script>
+
 		<title>TallyCount App</title>
 	</head>
-	<body></body>
+	<body>
+		<sl-card class="tally-container">
+			<div class="header-wrapper" slot="header">
+				<h2>Tally Count</h2>
+
+				<sl-dropdown>
+					<sl-button slot="trigger" size="large">
+						<sl-icon name="three-dots-vertical"></sl-icon>
+					</sl-button>
+
+					<sl-menu>
+						<sl-menu-item data-reset-counter value="reset-counter"
+							>Reset Counter
+						</sl-menu-item>
+					</sl-menu>
+				</sl-dropdown>
+			</div>
+
+			<p class="tally-value" data-tally-value>0</p>
+
+			<div class="buttons-wrapper" slot="footer">
+				<sl-button
+					class="buttons"
+					data-minus-button
+					variant="default"
+					size="large"
+				>
+					<sl-icon name="dash-lg"></sl-icon>
+				</sl-button>
+
+				<sl-button
+					class="buttons"
+					data-plus-button
+					variant="default"
+					size="large"
+				>
+					<sl-icon name="plus-lg"></sl-icon>
+				</sl-button>
+			</div>
+		</sl-card>
+	</body>
 </html>
