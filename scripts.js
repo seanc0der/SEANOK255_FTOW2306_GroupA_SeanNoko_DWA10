@@ -1,7 +1,11 @@
 // @ts-check
 
-/** @type {number} */
+/**
+ * The state of the tally app
+ * @type {number} */
 let tally = 0;
+
+// Query-selecting of elements to be dynamically manipulated
 
 /** @type {HTMLElement | null} */
 const tallyCount = document.querySelector("[data-tally-value]");
@@ -14,6 +18,8 @@ const plusButton = document.querySelector("[data-plus-button]");
 
 /** @type {HTMLElement | null} */
 const resetCounter = document.querySelector("[data-reset-counter]");
+
+// Event handlers and Exception handling
 
 if (!(tallyCount instanceof HTMLElement)) {
 	throw new Error(`${tallyCount} is not an HTMLElement instance.`);
