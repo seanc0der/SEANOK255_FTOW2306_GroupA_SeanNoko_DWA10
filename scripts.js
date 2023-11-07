@@ -6,8 +6,8 @@
  * @param {object} props - The properties object containing parameters for the element search.
  * @param {string} props.dataAttr - The data attribute to search for, excluding the `data-` prefix.
  * @param {string} [props.value] - Optional value assigned to the data attribute, if any.
- * @returns {HTMLElement} - The HTML element with the specified data attribute.
- * @throws Throws an error if the element with the specified data attribute is not of type 'HTMLElement'.
+ * @returns {HTMLElement} The HTML element with the specified data attribute.
+ * @throws Throws an error if the element with the specified data attribute is not of type `HTMLElement`.
  */
 const getHTML = (props) => {
 	const { dataAttr, value } = props;
@@ -28,9 +28,9 @@ const getHTML = (props) => {
 /**
  * @typedef {Object} Tally - Represents a tally object.
  * @property {number} value - The current value of the tally counter.
- * @property {Function} increment - Function to increase the {@link Tally#value} by `1`.
- * @property {Function} decrement - Function to decrease the {@link Tally#value} by `1`.
- * @property {Function} reset - Function to reset the {@link Tally#value} to `0`.
+ * @property {Function} increment - Function to increase the {@link Tally.value} by `1`.
+ * @property {Function} decrement - Function to decrease the {@link Tally.value} by `1`.
+ * @property {Function} reset - Function to reset the {@link Tally.value} to `0`.
  */
 
 /**
