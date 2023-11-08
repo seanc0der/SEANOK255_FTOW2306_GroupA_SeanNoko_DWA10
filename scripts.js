@@ -1,29 +1,6 @@
 // @ts-check
 
-/**
- * Finds and returns the HTML element with the specified data attribute.
- *
- * @param {object} props - The properties object containing parameters for the element search.
- * @param {string} props.dataAttr - The data attribute to search for, excluding the `data-` prefix.
- * @param {string} [props.value] - Optional value assigned to the data attribute, if any.
- * @returns {HTMLElement} The HTML element with the specified data attribute.
- * @throws Throws an error if the element with the specified data attribute is not of type `HTMLElement`.
- */
-const getHTML = (props) => {
-	const { dataAttr, value } = props;
-
-	const selector = value
-		? `[data-${dataAttr}]="${value}"`
-		: `[data-${dataAttr}]`;
-
-	const element = document.querySelector(selector);
-
-	if (!(element instanceof HTMLElement)) {
-		throw new Error(`${element} is not an HTMLElement instance.`);
-	}
-
-	return element;
-};
+import { elements, createAlertComponent } from "./modules/dom-manipulation.js";
 
 /**
  * @typedef {Object} Tally - Represents a tally object.
@@ -34,7 +11,8 @@ const getHTML = (props) => {
  */
 
 /**
- * The tally object that keeps track of the tally counter value and provides methods to manipulate it.
+ * The tally object that keeps track of the tally counter value and provides
+ * methods to manipulate it, as defined in the {@link Tally} `typedef`.
  *
  * @type {Tally}
  * */
@@ -54,27 +32,44 @@ const tally = {
 	},
 };
 
-// Query-selecting of elements to be dynamically manipulated
-const elements = {
-	tallyValue: getHTML({ dataAttr: "tally-value" }),
-	minusButton: getHTML({ dataAttr: "minus-button" }),
-	plusButton: getHTML({ dataAttr: "plus-button" }),
-	resetCounter: getHTML({ dataAttr: "reset-counter" }),
+/**
+ * Handles the creation of the alert component, appends it to the DOM, and
+ * simulates a toast-like behavior.
+ *
+ * @returns {HTMLElement} - The created alert element.
+ */
+const alertToastNotifierHandler = () => {
+	const alert = createAlertComponent({
+		message: "Tally Counter successfully reset to 0",
+		variant: "success",
+		closable: true,
+		duration: 3000,
+		icon: "check2-circle",
+	});
+
+	elements.alertContainer.appendChild(alert);
+
+	// TODO: Method is available for the web component, I haven't figured out how to integrate it.
+	// @ts-ignore
+	return alert.toast();
 };
 
-// Event handlers
+// Click Event Listeners
 
 elements.minusButton.addEventListener("click", () => {
 	tally.decrement();
-	elements.tallyValue.textContent = tally.toString();
+	elements.tallyValue.textContent = String(tally.value);
 });
 
 elements.plusButton.addEventListener("click", () => {
 	tally.increment();
-	elements.tallyValue.textContent = tally.toString();
+	elements.tallyValue.textContent = String(tally.value);
 });
 
+// TODO: Toast notification displays on the second click, need to figure out why.
 elements.resetCounter.addEventListener("click", () => {
 	tally.reset();
-	elements.tallyValue.textContent = tally.toString();
+	elements.tallyValue.textContent = String(tally.value);
+
+	alertToastNotifierHandler();
 });
